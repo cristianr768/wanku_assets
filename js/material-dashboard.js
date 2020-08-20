@@ -1,4 +1,12 @@
-isWindows = -1 < navigator.platform.indexOf("Win"), isWindows ? (0 != $(".sidebar").length && new PerfectScrollbar(".sidebar"), 0 != $(".sidebar-wrapper").length && new PerfectScrollbar(".sidebar-wrapper"), 0 != $(".main-panel").length && new PerfectScrollbar(".main-panel"), 0 != $(".main").length && new PerfectScrollbar("main"), $("html").addClass("perfect-scrollbar-on")) : $("html").addClass("perfect-scrollbar-off");
+! function() {
+    if (isWindows = -1 < navigator.platform.indexOf("Win"), isWindows) {
+        if (0 != $(".sidebar").length) new PerfectScrollbar(".sidebar");
+        if (0 != $(".sidebar-wrapper").length) new PerfectScrollbar(".sidebar-wrapper");
+        if (0 != $(".main-panel").length) new PerfectScrollbar(".main-panel");
+        if (0 != $(".main").length) new PerfectScrollbar("main");
+        $("html").addClass("perfect-scrollbar-on")
+    } else $("html").addClass("perfect-scrollbar-off")
+}();
 var breakCards = !0,
     searchVisible = 0,
     transparent = !0,
@@ -26,83 +34,88 @@ function debounce(t, n, i) {
     }
 }
 $(document).ready(function() {
-        $sidebar = $(".sidebar"), window_width = $(window).width(), $("body").bootstrapMaterialDesign({
-            autofill: !1
-        }), md.initSidebarsCheck(), window_width = $(window).width(), md.checkSidebarImage(), md.initMinimizeSidebar(), $(".dropdown-menu a.dropdown-toggle").on("click", function(e) {
-            var a = $(this),
-                t = $(this).offsetParent(".dropdown-menu");
-            return $(this).next().hasClass("show") || $(this).parents(".dropdown-menu").first().find(".show").removeClass("show"), $(this).next(".dropdown-menu").toggleClass("show"), $(this).closest("a").toggleClass("open"), $(this).parents("a.dropdown-item.dropdown.show").on("hidden.bs.dropdown", function(e) {
-                $(".dropdown-menu .show").removeClass("show")
-            }), t.parent().hasClass("navbar-nav") || a.next().css({
-                top: a[0].offsetTop,
-                left: t.outerWidth() - 4
-            }), !1
-        }), 0 != $(".selectpicker").length && $(".selectpicker").selectpicker(), $('[rel="tooltip"]').tooltip(), $('[data-toggle="popover"]').popover();
-        var e = $(".tagsinput").data("color");
-        0 != $(".tagsinput").length && $(".tagsinput").tagsinput(), $(".bootstrap-tagsinput").addClass(e + "-badge"), $(".select").dropdown({
-            dropdownClass: "dropdown-menu",
-            optionClass: ""
-        }), $(".form-control").on("focus", function() {
-            $(this).parent(".input-group").addClass("input-group-focus")
-        }).on("blur", function() {
-            $(this).parent(".input-group").removeClass("input-group-focus")
-        }), 1 == breakCards && $('[data-header-animation="true"]').each(function() {
-            $(this);
-            var a = $(this).parent(".card");
-            a.find(".fix-broken-card").click(function() {
-                console.log(this);
-                var e = $(this).parent().parent().siblings(".card-header, .card-header-image");
-                e.removeClass("hinge").addClass("fadeInDown"), a.attr("data-count", 0), setTimeout(function() {
-                    e.removeClass("fadeInDown animate")
-                }, 480)
-            }), a.mouseenter(function() {
-                var e = $(this);
-                hover_count = parseInt(e.attr("data-count"), 10) + 1 || 0, e.attr("data-count", hover_count), 20 <= hover_count && $(this).children(".card-header, .card-header-image").addClass("hinge animated")
-            })
-        }), $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on("click", function() {
-            $(this).hasClass("error") && $(this).closest("div").removeClass("has-error")
+    $sidebar = $(".sidebar"), window_width = $(window).width(), $("body").bootstrapMaterialDesign({
+        autofill: !1
+    }), md.initSidebarsCheck(), window_width = $(window).width(), md.checkSidebarImage(), md.initMinimizeSidebar(), $(".dropdown-menu a.dropdown-toggle").on("click", function(e) {
+        var a = $(this),
+            t = $(this).offsetParent(".dropdown-menu");
+        return $(this).next().hasClass("show") || $(this).parents(".dropdown-menu").first().find(".show").removeClass("show"), $(this).next(".dropdown-menu").toggleClass("show"), $(this).closest("a").toggleClass("open"), $(this).parents("a.dropdown-item.dropdown.show").on("hidden.bs.dropdown", function(e) {
+            $(".dropdown-menu .show").removeClass("show")
+        }), t.parent().hasClass("navbar-nav") || a.next().css({
+            top: a[0].offsetTop,
+            left: t.outerWidth() - 4
+        }), !1
+    }), 0 != $(".selectpicker").length && $(".selectpicker").selectpicker(), $('[rel="tooltip"]').tooltip(), $('[data-toggle="popover"]').popover();
+    var e = $(".tagsinput").data("color");
+    0 != $(".tagsinput").length && $(".tagsinput").tagsinput(), $(".bootstrap-tagsinput").addClass(e + "-badge"), $(".select").dropdown({
+        dropdownClass: "dropdown-menu",
+        optionClass: ""
+    }), $(".form-control").on("focus", function() {
+        $(this).parent(".input-group").addClass("input-group-focus")
+    }).on("blur", function() {
+        $(this).parent(".input-group").removeClass("input-group-focus")
+    }), 1 == breakCards && $('[data-header-animation="true"]').each(function() {
+        $(this);
+        var a = $(this).parent(".card");
+        a.find(".fix-broken-card").click(function() {
+            console.log(this);
+            var e = $(this).parent().parent().siblings(".card-header, .card-header-image");
+            e.removeClass("hinge").addClass("fadeInDown"), a.attr("data-count", 0), setTimeout(function() {
+                e.removeClass("fadeInDown animate")
+            }, 480)
+        }), a.mouseenter(function() {
+            var e = $(this);
+            hover_count = parseInt(e.attr("data-count"), 10) + 1 || 0, e.attr("data-count", hover_count), 20 <= hover_count && $(this).children(".card-header, .card-header-image").addClass("hinge animated")
         })
-    }), $(document).on("click", ".navbar-toggler", function() {
-        var e;
-        $toggle = $(this), mobile_menu_visible = 1 == mobile_menu_visible ? ($("html").removeClass("nav-open"), $(".close-layer").remove(), setTimeout(function() {
-            $toggle.removeClass("toggled")
-        }, 400), 0) : (setTimeout(function() {
+    }), $('input[type="checkbox"][required="true"], input[type="radio"][required="true"]').on("click", function() {
+        $(this).hasClass("error") && $(this).closest("div").removeClass("has-error")
+    })
+}), $(document).on("click", ".navbar-toggler", function() {
+    if ($toggle = $(this), 1 == mobile_menu_visible) $("html").removeClass("nav-open"), $(".close-layer").remove(), setTimeout(function() {
+        $toggle.removeClass("toggled")
+    }, 400), mobile_menu_visible = 0;
+    else {
+        setTimeout(function() {
             $toggle.addClass("toggled")
-        }, 430), e = $('<div class="close-layer"></div>'), 0 != $("body").find(".main-panel").length ? e.appendTo(".main-panel") : $("body").hasClass("off-canvas-sidebar") && e.appendTo(".wrapper-full-page"), setTimeout(function() {
+        }, 430);
+        var e = $('<div class="close-layer"></div>');
+        0 != $("body").find(".main-panel").length ? e.appendTo(".main-panel") : $("body").hasClass("off-canvas-sidebar") && e.appendTo(".wrapper-full-page"), setTimeout(function() {
             e.addClass("visible")
         }, 100), e.click(function() {
             $("html").removeClass("nav-open"), mobile_menu_visible = 0, e.removeClass("visible"), setTimeout(function() {
                 e.remove(), $toggle.removeClass("toggled")
             }, 400)
-        }), $("html").addClass("nav-open"), 1)
-    }), $(window).resize(function() {
-        md.initSidebarsCheck(), seq = seq2 = 0, setTimeout(function() {
-            md.initDashboardPageCharts()
-        }, 500)
-    }), md = {
-        misc: {
-            navbar_menu_visible: 0,
-            active_collapse: !0,
-            disabled_collapse_init: 0
-        },
-        checkSidebarImage: function() {
-            $sidebar = $(".sidebar"), image_src = $sidebar.data("image"), void 0 !== image_src && (sidebar_container = '<div class="sidebar-background" style="background-image: url(' + image_src + ') "/>', $sidebar.append(sidebar_container))
-        },
-        showNotification: function(e, a) {
-            type = ["", "info", "danger", "success", "warning", "rose", "primary"], color = Math.floor(6 * Math.random() + 1), $.notify({
-                icon: "add_alert",
-                message: "Welcome to <b>Material Dashboard Pro</b> - a beautiful admin panel for every web developer."
-            }, {
-                type: type[color],
-                timer: 3e3,
-                placement: {
-                    from: e,
-                    align: a
-                }
-            })
-        },
-        initDocumentationCharts: function() {
-            0 != $("#dailySalesChart").length && 0 != $("#websiteViewsChart").length && (dataDailySalesChart = {
+        }), $("html").addClass("nav-open"), mobile_menu_visible = 1
+    }
+}), $(window).resize(function() {
+    md.initSidebarsCheck(), seq = seq2 = 0, setTimeout(function() {
+        md.initDashboardPageCharts()
+    }, 500)
+}), md = {
+    misc: {
+        navbar_menu_visible: 0,
+        active_collapse: !0,
+        disabled_collapse_init: 0
+    },
+    checkSidebarImage: function() {
+        $sidebar = $(".sidebar"), image_src = $sidebar.data("image"), void 0 !== image_src && (sidebar_container = '<div class="sidebar-background" style="background-image: url(' + image_src + ') "/>', $sidebar.append(sidebar_container))
+    },
+    showNotification: function(e, a) {
+        type = ["", "info", "danger", "success", "warning", "rose", "primary"], color = Math.floor(6 * Math.random() + 1), $.notify({
+            icon: "add_alert",
+            message: "Welcome to <b>Material Dashboard Pro</b> - a beautiful admin panel for every web developer."
+        }, {
+            type: type[color],
+            timer: 3e3,
+            placement: {
+                from: e,
+                align: a
+            }
+        })
+    },
+    initDocumentationCharts: function() {
+        if (0 != $("#dailySalesChart").length && 0 != $("#websiteViewsChart").length) {
+            dataDailySalesChart = {
                 labels: ["M", "T", "W", "T", "F", "S", "S"],
                 series: [
                     [12, 17, 7, 17, 23, 18, 38]
@@ -119,78 +132,80 @@ $(document).ready(function() {
                     bottom: 0,
                     left: 0
                 }
-            }, new Chartist.Line("#dailySalesChart", dataDailySalesChart, optionsDailySalesChart), new Chartist.Line("#websiteViewsChart", dataDailySalesChart, optionsDailySalesChart))
-        },
-        initFormExtendedDatetimepickers: function() {
-            $(".datetimepicker").datetimepicker({
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: "fa fa-chevron-left",
-                    next: "fa fa-chevron-right",
-                    today: "fa fa-screenshot",
-                    clear: "fa fa-trash",
-                    close: "fa fa-remove"
-                }
-            }), $(".datepicker").datetimepicker({
-                format: "MM/DD/YYYY",
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: "fa fa-chevron-left",
-                    next: "fa fa-chevron-right",
-                    today: "fa fa-screenshot",
-                    clear: "fa fa-trash",
-                    close: "fa fa-remove"
-                }
-            }), $(".timepicker").datetimepicker({
-                format: "h:mm A",
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: "fa fa-chevron-left",
-                    next: "fa fa-chevron-right",
-                    today: "fa fa-screenshot",
-                    clear: "fa fa-trash",
-                    close: "fa fa-remove"
-                }
-            })
-        },
-        initSliders: function() {
-            var e = document.getElementById("sliderRegular");
-            noUiSlider.create(e, {
-                start: 40,
-                connect: [!0, !1],
-                range: {
-                    min: 0,
-                    max: 100
-                }
-            });
-            var a = document.getElementById("sliderDouble");
-            noUiSlider.create(a, {
-                start: [20, 60],
-                connect: !0,
-                range: {
-                    min: 0,
-                    max: 100
-                }
-            })
-        },
-        initSidebarsCheck: function() {
-            $(window).width() <= 991 && 0 != $sidebar.length && md.initRightMenu()
-        },
-        checkFullPageBackgroundImage: function() {
-            $page = $(".full-page"), image_src = $page.data("image"), void 0 !== image_src && (image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>', $page.append(image_container))
-        },
-        initDashboardPageCharts: function() {
-            var e, a, t;
-            0 == $("#dailySalesChart").length && 0 == $("#completedTasksChart").length && 0 == $("#websiteViewsChart").length || (dataDailySalesChart = {
+            };
+            new Chartist.Line("#dailySalesChart", dataDailySalesChart, optionsDailySalesChart), new Chartist.Line("#websiteViewsChart", dataDailySalesChart, optionsDailySalesChart)
+        }
+    },
+    initFormExtendedDatetimepickers: function() {
+        $(".datetimepicker").datetimepicker({
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
+                today: "fa fa-screenshot",
+                clear: "fa fa-trash",
+                close: "fa fa-remove"
+            }
+        }), $(".datepicker").datetimepicker({
+            format: "MM/DD/YYYY",
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
+                today: "fa fa-screenshot",
+                clear: "fa fa-trash",
+                close: "fa fa-remove"
+            }
+        }), $(".timepicker").datetimepicker({
+            format: "h:mm A",
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: "fa fa-chevron-left",
+                next: "fa fa-chevron-right",
+                today: "fa fa-screenshot",
+                clear: "fa fa-trash",
+                close: "fa fa-remove"
+            }
+        })
+    },
+    initSliders: function() {
+        var e = document.getElementById("sliderRegular");
+        noUiSlider.create(e, {
+            start: 40,
+            connect: [!0, !1],
+            range: {
+                min: 0,
+                max: 100
+            }
+        });
+        var a = document.getElementById("sliderDouble");
+        noUiSlider.create(a, {
+            start: [20, 60],
+            connect: !0,
+            range: {
+                min: 0,
+                max: 100
+            }
+        })
+    },
+    initSidebarsCheck: function() {
+        $(window).width() <= 991 && 0 != $sidebar.length && md.initRightMenu()
+    },
+    checkFullPageBackgroundImage: function() {
+        $page = $(".full-page"), image_src = $page.data("image"), void 0 !== image_src && (image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>', $page.append(image_container))
+    },
+    initDashboardPageCharts: function() {
+        if (0 != $("#dailySalesChart").length || 0 != $("#completedTasksChart").length || 0 != $("#websiteViewsChart").length) {
+            dataDailySalesChart = {
                 labels: ["M", "T", "W", "T", "F", "S", "S"],
                 series: [
                     [12, 17, 7, 17, 23, 18, 38]
@@ -207,7 +222,9 @@ $(document).ready(function() {
                     bottom: 0,
                     left: 0
                 }
-            }, e = new Chartist.Line("#dailySalesChart", dataDailySalesChart, optionsDailySalesChart), md.startAnimationForLineChart(e), dataCompletedTasksChart = {
+            };
+            var e = new Chartist.Line("#dailySalesChart", dataDailySalesChart, optionsDailySalesChart);
+            md.startAnimationForLineChart(e), dataCompletedTasksChart = {
                 labels: ["12p", "3p", "6p", "9p", "12p", "3a", "6a", "9a"],
                 series: [
                     [230, 750, 450, 300, 280, 240, 200, 190]
@@ -224,7 +241,10 @@ $(document).ready(function() {
                     bottom: 0,
                     left: 0
                 }
-            }, a = new Chartist.Line("#completedTasksChart", dataCompletedTasksChart, optionsCompletedTasksChart), md.startAnimationForLineChart(a), t = Chartist.Bar("#websiteViewsChart", {
+            };
+            var a = new Chartist.Line("#completedTasksChart", dataCompletedTasksChart, optionsCompletedTasksChart);
+            md.startAnimationForLineChart(a);
+            var t = Chartist.Bar("#websiteViewsChart", {
                 labels: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
                 series: [
                     [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
@@ -250,28 +270,30 @@ $(document).ready(function() {
                         }
                     }
                 }]
-            ]), md.startAnimationForBarChart(t))
-        },
-        initMinimizeSidebar: function() {
-            $("#minimizeSidebar").click(function() {
-                $(this), 1 == md.misc.sidebar_mini_active ? ($("body").removeClass("sidebar-mini"), md.misc.sidebar_mini_active = !1) : ($("body").addClass("sidebar-mini"), md.misc.sidebar_mini_active = !0);
-                var e = setInterval(function() {
-                    window.dispatchEvent(new Event("resize"))
-                }, 180);
-                setTimeout(function() {
-                    clearInterval(e)
-                }, 1e3)
-            })
-        },
-        checkScrollForTransparentNavbar: debounce(function() {
-            260 < $(document).scrollTop() ? transparent && (transparent = !1, $(".navbar-color-on-scroll").removeClass("navbar-transparent")) : transparent || (transparent = !0, $(".navbar-color-on-scroll").addClass("navbar-transparent"))
-        }, 17),
-        initRightMenu: debounce(function() {
-                $sidebar_wrapper = $(".sidebar-wrapper"), mobile_menu_initialized ? 991 < $(window).width(), $sidebar_wrapper.find(".nav-mobile-menu").remove(), mobile_menu_initialized = !1): ($navbar = $("nav").find(".navbar-collapse").children(".navbar-nav"), mobile_menu_content = "", nav_content = $navbar.html(), nav_content = '<ul class="nav navbar-nav nav-mobile-menu">' + nav_content + "</ul>", $sidebar_nav = $sidebar_wrapper.find(" > .nav"), $nav_content = $(nav_content), $navbar_form = $(navbar_form), $nav_content.insertBefore($sidebar_nav), $navbar_form.insertBefore($nav_content), $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function(e) {
-                e.stopPropagation()
-            }), window.dispatchEvent(new Event("resize")), mobile_menu_initialized = !0)
-        },
-        200),
+            ]);
+            md.startAnimationForBarChart(t)
+        }
+    },
+    initMinimizeSidebar: function() {
+        $("#minimizeSidebar").click(function() {
+            $(this);
+            1 == md.misc.sidebar_mini_active ? ($("body").removeClass("sidebar-mini"), md.misc.sidebar_mini_active = !1) : ($("body").addClass("sidebar-mini"), md.misc.sidebar_mini_active = !0);
+            var e = setInterval(function() {
+                window.dispatchEvent(new Event("resize"))
+            }, 180);
+            setTimeout(function() {
+                clearInterval(e)
+            }, 1e3)
+        })
+    },
+    checkScrollForTransparentNavbar: debounce(function() {
+        260 < $(document).scrollTop() ? transparent && (transparent = !1, $(".navbar-color-on-scroll").removeClass("navbar-transparent")) : transparent || (transparent = !0, $(".navbar-color-on-scroll").addClass("navbar-transparent"))
+    }, 17),
+    initRightMenu: debounce(function() {
+        $sidebar_wrapper = $(".sidebar-wrapper"), mobile_menu_initialized ? 991 < $(window).width() && ($sidebar_wrapper.find(".navbar-form").remove(), $sidebar_wrapper.find(".nav-mobile-menu").remove(), mobile_menu_initialized = !1) : ($navbar = $("nav").find(".navbar-collapse").children(".navbar-nav"), mobile_menu_content = "", nav_content = $navbar.html(), nav_content = '<ul class="nav navbar-nav nav-mobile-menu">' + nav_content + "</ul>", navbar_form = $("nav").find(".navbar-form").get(0).outerHTML, $sidebar_nav = $sidebar_wrapper.find(" > .nav"), $nav_content = $(nav_content), $navbar_form = $(navbar_form), $nav_content.insertBefore($sidebar_nav), $navbar_form.insertBefore($nav_content), $(".sidebar-wrapper .dropdown .dropdown-menu > li > a").click(function(e) {
+            e.stopPropagation()
+        }), window.dispatchEvent(new Event("resize")), mobile_menu_initialized = !0)
+    }, 200),
     startAnimationForLineChart: function(e) {
         e.on("draw", function(e) {
             "line" === e.type || "area" === e.type ? e.element.animate({
