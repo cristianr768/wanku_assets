@@ -349,7 +349,6 @@ md = {
             mobile_menu_content = '';
             nav_content = $navbar.html();
             nav_content = '<ul class="nav navbar-nav nav-mobile-menu">' + nav_content + '</ul>';
-            navbar_form = $('nav').find('.navbar-form').get(0).outerHTML;
             $sidebar_nav = $sidebar_wrapper.find(' > .nav');
             // insert the navbar form before the sidebar list
             $nav_content = $(nav_content);
@@ -364,8 +363,7 @@ md = {
             mobile_menu_initialized = true;
         } else {
             if ($(window).width() > 991) {
-                // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px
-                $sidebar_wrapper.find('.navbar-form').remove();
+                // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px                
                 $sidebar_wrapper.find('.nav-mobile-menu').remove();
                 mobile_menu_initialized = false;
             }
